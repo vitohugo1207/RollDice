@@ -50,6 +50,11 @@ if __name__ == '__main__':
             dice = '' # Clean variable dice, for not conflict
             pass
 
+        if '=' in dice:
+            dice = (dice).replace('=', '')
+            print(eval(dice))
+            dice = ''
+
         if not dice == '': # If dice is empty pass.
             # __Dice scroll times__
             diceFindD = dice.find('d') # Find "d" position
@@ -68,7 +73,6 @@ if __name__ == '__main__':
                     rollBonus = int(rollBonus) # Str for Int
                     if len(diceT) > 2: # If characters of diceT (maximum limit of scroll dice) > 2
                         diceT = diceT[:len(diceT) - 1] # Remove the excess number
-                    print(diceT, diceA, rollBonus)
                 except:
                     error()
 
@@ -80,7 +84,6 @@ if __name__ == '__main__':
                     rollBonus = int(rollBonus) # Str for Int
                     if len(diceT) > 2: # If characters of diceT (maximum limit of scroll dice) > 2.
                         diceT = diceT[:len(diceT) - 1] # Remove the excess number.
-                    print(diceT, diceA, rollBonus)
                 except:
                     error()
 
