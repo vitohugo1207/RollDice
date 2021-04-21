@@ -6,6 +6,8 @@ Help:
   For use the dice: time_of_scroll_dice D interval +/- bonus, for exemple: 2d20+4
 exit for close;
 
+  The dice's bonus not working without "d" in dice, but scroll dice working without 'd';
+
   Help for see commands and how working;
 
   Shuffle for shuffle the order of some words and/or number (still not working);
@@ -23,6 +25,8 @@ Ajuda:
 
 
   Para usar o dado: vezes_of_rollagem_de_dados D intervalo, por exemplo: 2d20+4;
+  
+  O bonus do dado não funciona sem o "d" em dado, mas os dados funciona sem o "d";
 
   Para sair do programa: "exit";
 
