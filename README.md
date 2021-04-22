@@ -15,7 +15,7 @@ exit for close;
   Choice for choice one word or number (still not working).
 
 
-  RollDice on Replit: https://replit.com/@IkkiArtz1/RollDice#dice.py
+  RollDice on Replit: https://replit.com/@IkkiArtz/RollDice#dice.py
 
 ---
 
@@ -37,4 +37,4 @@ Ajuda:
   Para escolher uma plavra ou number (Ainda não funcionando).
   
   
-RollDice no Replit: https://replit.com/@IkkiArtz1/RollDice#dice.py
+RollDice no Replit: https://replit.com/@IkkiArtz/RollDice#dice.py
