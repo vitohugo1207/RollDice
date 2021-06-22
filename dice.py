@@ -105,11 +105,11 @@ def diceMain(dice): # The variable of input is "dice"
 
     # __Data show__
     timenow = datetime.now() # Acquiring time of scrolling dice
-    time = timenow.strftime('%d/%m/%y at %H:%M:%S') # Formatting time of scrolling dice
+    time = timenow.strftime('%d/%m/%Y at %H:%M:%S') # Formatting time of scrolling dice
     print(time) # Show time of scrolling dice
 
     if len(rollList) > 1: # If characters of rollList (maximum limit of scroll dice) > one scroll dice
-        print(f'List of dice roll: {rollList}') # Show list of scroll dice and bonus
+        print(f'List of dice roll: {", ".join(map(str, rollList))}') # Show list of scroll dice and bonus
     print(f'Total of dice roll: {rollTotal}') # Show total of scroll dice and bonus
 
 def choiceMain():

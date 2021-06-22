@@ -1,0 +1,2 @@
+def choiceMain():
+    choice(choiceOne)

@@ -1,0 +1,2 @@
+def shuffleMain():
+    shuffle(deck)
