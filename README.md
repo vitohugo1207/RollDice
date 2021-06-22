@@ -6,7 +6,7 @@ Help:
   For use the dice: time_of_scroll_dice D interval +/- bonus, for exemple: 2d20+4
 exit for close;
 
-  The dice's bonus not working without "d" in dice, but scroll dice working without 'd';
+  The dice's bonus does not working without "d" in dice, but scroll dice working without 'd';
 
   Help for see commands and how working;
 
