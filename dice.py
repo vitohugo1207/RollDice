@@ -1,6 +1,8 @@
 from random import randrange, choice, shuffle
 from datetime import datetime
 from time import sleep
+from shuffle import shuffleMain
+from choice import choiceMain
 
 # Made by IkkiArtz
 
@@ -23,6 +25,8 @@ def diceMain(dice): # The variable of input is "dice"
     The dice's bonus not working without 'd' in dice, but scroll dice working without 'd'
     '''
 
+    diceMin = 1 # The minimum for start scroll dice
+    
     # __Dice scroll times__
 
     diceFindD = dice.find('d') # Find "d" position
@@ -73,9 +77,6 @@ def diceMain(dice): # The variable of input is "dice"
         sleep(5)
         dice = ''
         return
-
-    # __Created a variable diceMin__
-    diceMin = 0 # The minimum for start scroll dice
 
     rollList = [] # Created a list
 
