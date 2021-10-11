@@ -11,7 +11,7 @@ class diceMain:
         self.rollList = []
         self.rollBonus = 0
 
-    def getScrollTimes(dice):
+    def getScrollTimes(self):
         '''Dice scroll times'''
         
         diceFindD = self.dice.find('d')
