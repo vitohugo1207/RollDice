@@ -1,4 +1,4 @@
-RollDice is program made in Python by IkkiArtz. The RollDice can roll dice at the interval that you choose, times as you want and sum bonus.
+rolldice is program made in Python by IkkiArtz. The rolldice can roll dice at the interval that you choose, times as you want and sum bonus.
 
 Help: 
 
@@ -15,11 +15,11 @@ exit for close;
   Choice for choice one word or number (still not working).
 
 
-  RollDice on Replit: https://replit.com/@IkkiArtz/RollDice#dice.py
+  rolldice on Replit: https://replit.com/@IkkiArtz/rolldice#dice.py
 
 ---
 
-RollDice é um programa feito em Python por IkkiArtz. O RollDice pode rolar dados no intervalo que você escolher, quantas vezes que você quiser e adcionar bonus.
+rolldice é um programa feito em Python por IkkiArtz. O rolldice pode rolar dados no intervalo que você escolher, quantas vezes que você quiser e adcionar bonus.
 
 Ajuda:
 
@@ -37,4 +37,4 @@ Ajuda:
   Para escolher uma plavra ou number (Ainda não funcionando).
   
   
-RollDice no Replit: https://replit.com/@IkkiArtz/RollDice#dice.py
+rolldice no Replit: https://replit.com/@IkkiArtz/rolldice#dice.py

@@ -1,133 +1,127 @@
 from random import randrange, choice, shuffle
 from datetime import datetime
 from time import sleep
-from shuffle import shuffleMain
-from choice import choiceMain
 
-# Made by IkkiArtz
+class diceMain:
+    def __init__(self, dice):
+        self.dice = dice
+        self.diceT = 0
+        self.diceA = 0
+        self.diceMin = 1 # The minimum for start scroll dice
+        self.rollList = []
+        self.rollBonus = 0
 
+    def getScrollTimes(dice):
+        '''Dice scroll times'''
+        
+        diceFindD = self.dice.find('d')
+        self.diceA = self.dice[:diceFindD].replace('d', '') # Extraction time of dice roll and remove "d"
+        if self.diceA == '':
+            self.diceA = 1
+        self.diceT = self.dice[diceFindD:].replace('d', '') # Extraction interval of draw
 
-def lin():
-    print('-+' * 20)
+    def bonus(self):
+        '''Bonus extraction'''
 
-def help():
-    print("""For use the dice: time_of_scroll_dice D range_0_to_10 +/- bonus, for exemple: 2d20+4
-    \nThe dice's bonus not working without 'd' in dice, but scroll dice working without 'd'
-    \nexit for close;
-    \nHelp for see commands and how working;
-    \nShuffle for shuffle the order of some words and/or number (still not working);
-    \nChoice for choice one word or number (still not working);""")
-    dice = ''
+        if '+' in self.dice:
+            diceFindBonus = self.dice.find('+')
+            rollBonus = self.dice[diceFindBonus:].replace('+', '')
+            self.diceT = self.diceT[:diceFindBonus - 1].replace('+', '')
+            try:
+                rollBonus = int(rollBonus)
+            except ValueError:
+                dice = self.dice[:diceFindBonus]
 
-def diceMain(dice): # The variable of input is "dice"
-    '''
-    For use the dice: time_of_scroll_dice D range_0_to_10 +/- bonus, for exemple: 2d20+4
-    The dice's bonus not working without 'd' in dice, but scroll dice working without 'd'
-    '''
+        elif '-' in self.dice:
+            diceFindBonus = self.dice.find('-')
+            rollBonus = self.dice[diceFindBonus:].replace('-', '')
+            self.diceT = self.diceT[:diceFindBonus - 1].replace('-', '')
+            try:
+                rollBonus = int(rollBonus)
+            except ValueError:
+                dice = self.dice[:diceFindBonus]
 
-    diceMin = 1 # The minimum for start scroll dice
-    
-    # __Dice scroll times__
+        elif '*' in self.dice:
+            diceFindBonus = self.dice.find('*')
+            rollBonus = self.dice[diceFindBonus:].replace('*', '')
+            self.diceT = self.diceT[:diceFindBonus - 1].replace('*', '')
+            try:
+                rollBonus = int(rollBonus)
+            except ValueError:
+                dice = self.dice[:diceFindBonus]
 
-    diceFindD = dice.find('d') # Find "d" position
-    diceA = dice[:diceFindD].replace('d', '') # Extraction time of dice roll and remove "d"
-    if diceA == '': # If not was defined time of dice roll at variable
-        diceA = 1 # Roll the dice one time
-    diceT = dice[diceFindD:].replace('d', '') # Extraction interval of draw
+        elif '/' in self.dice:
+            diceFindBonus = self.dice.find('/')
+            rollBonus = self.dice[diceFindBonus:].replace('/', '')
+            self.diceT = self.diceT[:diceFindBonus - 1].replace('/', '')
+            try:
+                rollBonus = int(rollBonus)
+            except ValueError:
+                dice = self.dice[:diceFindBonus]
+        
+        if self.diceT == '0': # If not have 'd' in dice
+            self.diceA = 1
+            self.diceT = dice
 
-    # __Bonus extraction__
-    if '+' in dice:
-        try:
-            diceMore = dice.find('+') # Find position of the scroll bonus
-            rollBonus = dice[diceMore:].replace('+', '') # Remove the dice and "+"
-            diceT = diceT[:diceMore - 1].replace('+', '') # Remove the dice and "+"
-            rollBonus = int(rollBonus) # Str for Int
-            if len(diceT) > 2: # If characters of diceT (maximum limit of scroll dice) > 2
-                diceT = diceT[:len(diceT) - 1] # Remove the excess number
-        except:
-            print('I am sorry, did not understood. Type "help" for instructions.')
-            sleep(5)
-            dice = ''
-            return
+    def sumDice(self):
+        '''Sum List of dice roll and roll bonus'''
 
-    if '-' in dice:
-        try:
-            diceLess = dice.find('-') # Find position of the scroll bonus
-            rollBonus = dice[diceLess:].replace('-', '') # Remove the dice and "-"
-            diceT = dice[:diceLess - 1].replace('-', '') # Remove the dice and "-"
-            rollBonus = int(rollBonus) # Str for Int
-            if len(diceT) > 2: # If characters of diceT (maximum limit of scroll dice) > 2.
-                diceT = diceT[:len(diceT) - 1] # Remove the excess number.
-        except:
-            print('I am sorry, did not understood. Type "help" for instructions.')
-            sleep(5)
-            dice = ''
-            return
+        if '+' in self.dice:
+            rollTotal = sum(self.rollList) + rollBonus
+            self.rollList.append(f'+{rollBonus}')
+            rollBonus = ''
 
-    if diceT == '0': # If not have 'd' in dice
-        diceA = 1
-        diceT = dice
+        elif '-' in self.dice:
+            rollTotal = sum(self.rollList) - rollBonus
+            self.rollList.append(f'-{rollBonus}')
+            rollBonus = ''
 
-    # __Str for Int__
-    try:
-        diceT = int(diceT) + 1 # Counting with the 0
-        diceA = int(diceA)
-    except:
-        print('I am sorry, did not understood. Type "help" for instructions.')
-        sleep(5)
-        dice = ''
-        return
+        elif '*' in self.dice:
+            rollTotal = sum(self.rollList) * rollBonus
+            self.rollList.append(f'*{rollBonus}')
+            rollBonus = ''
 
-    rollList = [] # Created a list
+        elif '/' in self.dice:
+            rollTotal = sum(self.rollList) / rollBonus
+            self.rollList.append(f'/{rollBonus}')
+            rollBonus = ''
 
-    # __Loop of scroll dice time__
-    try:
-        for x in range(diceA):
-            rollList.append(randrange(diceMin, diceT))  # diceMin (Minimum) between diceT (Total)
-    except:
-        print('I am sorry, did not understood. Type "help" for instructions.')
-        sleep(5)
-        dice = ''
-        return
-
-    # __Sum List of dice roll and roll bonus__
-    if '+' in dice:
-        rollTotal = sum(rollList) + rollBonus # Sum list and roll
-        rollList.append(f'+{rollBonus}') # Add rollBonus at list
-        rollBonus = '' # Clean variable rollBonus
-
-    elif '-' in dice:
-        rollTotal = sum(rollList) - rollBonus # subtract list and roll
-        rollList.append(f'-{rollBonus}') # Add rollBonus at list
-        rollBonus = '' # Clean variable rollBonus
-
-    else:
-        rollTotal = sum(rollList) # Sum if not has rollBonus
-
-    # __Data show__
-    timenow = datetime.now() # Acquiring time of scrolling dice
-    time = timenow.strftime('%d/%m/%Y at %H:%M:%S') # Formatting time of scrolling dice
-    print(time) # Show time of scrolling dice
-
-    if len(rollList) > 1: # If characters of rollList (maximum limit of scroll dice) > one scroll dice
-        print(f'List of dice roll: {", ".join(map(str, rollList))}') # Show list of scroll dice and bonus
-    print(f'Total of dice roll: {rollTotal}') # Show total of scroll dice and bonus
-
-def choiceMain():
-    choice(choiceOne)
-
-def shuffleMain():
-    shuffle(deck)
-
-
-if __name__ == '__main__':
-    lin()  # Line
-    while True:
-        dice = str(input('-> ').replace(' ', '').lower())  # Data extraction, remove space and letter in lower
-        if dice == 'exit':
-            break
-        elif dice == 'help':
-            help()
         else:
-            diceMain(dice)
-            lin()
+            rollTotal = sum(self.rollList)
+
+    def dataShow(self):
+        '''Data show'''
+        timenow = datetime.now() # Acquiring time of scrolling dice
+        time = timenow.strftime('%d/%m/%Y at %H:%M:%S') # Formatting time of scrolling dice
+        print(time) # Show time of scrolling dice
+
+        if len(self.rollList) > 1: # If characters of self.rollList (maximum limit of scroll dice) > one scroll dice
+            print(f'List of dice roll: {", ".join(map(str, self.rollList))}') # Show list of scroll dice and bonus
+        print(f'Total of dice roll: {self.rollTotal}') # Show total of scroll dice and bonus
+
+    def dice(self):
+        self.getScrollTimes()
+        self.bonus()
+
+        try:
+            # __Str for Int__
+            self.diceT = int(self.diceT) + 1 # Counting with the 0
+            self.diceA = int(self.diceA)
+        except:
+            print('I am sorry, did not understood. Type "help" for instructions.')
+            sleep(5)
+            dice = ''
+            return
+
+        # __Loop of scroll dice time__
+        try:
+            for x in range(self.diceA):
+                self.rollList.append(randrange(self.diceMin, self.diceT))  # self.diceMin (Minimum) between self.diceT (Total)
+        except:
+            print('I am sorry, did not understood. Type "help" for instructions.')
+            sleep(5)
+            dice = ''
+            return
+
+        self.sumDice()
+        self.dataShow()
