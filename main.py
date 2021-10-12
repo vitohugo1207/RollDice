@@ -1,5 +1,5 @@
 from shuffle import shuffleMain
-from choice import choiceMain
+from choice import *
 from dice import *
 
 def lin():
@@ -17,9 +17,13 @@ def help():
 if __name__ == "__main__":
     while True:
         lin()
-        dice = str(input('-> ').replace(' ', '').lower())  # Data extraction, remove space and set letter in lower
-        if dice == 'exit':
+        roll = str(input('-> ').replace(' ', '').lower())  # Data extraction, remove space and set letter in lower
+        if roll == 'exit':
             break
         else:
-            diceImport = diceMain(dice)
-            diceImport.diceRoll()
+            if ',' in roll:
+                choiceImport = choiceClass(choiceOne = roll)
+                choiceImport.choiceDef()
+            else:
+                diceImport = diceMain(dice = roll)
+                diceImport.diceRoll()

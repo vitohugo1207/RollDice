@@ -1,6 +1,5 @@
-from random import randrange, choice, shuffle
+from random import randrange
 from datetime import datetime
-from time import sleep
 
 class diceMain():
     def __init__(self, dice):
