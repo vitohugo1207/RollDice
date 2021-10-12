@@ -14,14 +14,12 @@ def help():
     \nChoice for choice one word or number (still not working);""")
     dice = ''
 
-if __name__ == '__main__':
-    lin()  # Line
+if __name__ == "__main__":
     while True:
-        dice = str(input('-> ').replace(' ', '').lower())  # Data extraction, remove space and letter in lower
+        lin()
+        dice = str(input('-> ').replace(' ', '').lower())  # Data extraction, remove space and set letter in lower
         if dice == 'exit':
             break
-        elif dice == 'help':
-            help()
         else:
-            diceMain.dice(dice)
-            lin()
+            diceImport = diceMain(dice)
+            diceImport.diceRoll()

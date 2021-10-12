@@ -2,14 +2,15 @@ from random import randrange, choice, shuffle
 from datetime import datetime
 from time import sleep
 
-class diceMain:
+class diceMain():
     def __init__(self, dice):
         self.dice = dice
-        self.diceT = 0
-        self.diceA = 0
+        self.diceT = None
+        self.diceA = None
         self.diceMin = 1 # The minimum for start scroll dice
         self.rollList = []
-        self.rollBonus = 0
+        self.rollBonus = None
+        self.rollTotal = None
 
     def getScrollTimes(self):
         '''Dice scroll times'''
@@ -25,37 +26,37 @@ class diceMain:
 
         if '+' in self.dice:
             diceFindBonus = self.dice.find('+')
-            rollBonus = self.dice[diceFindBonus:].replace('+', '')
+            self.rollBonus = self.dice[diceFindBonus:].replace('+', '')
             self.diceT = self.diceT[:diceFindBonus - 1].replace('+', '')
             try:
-                rollBonus = int(rollBonus)
+                self.rollBonus = int(self.rollBonus)
             except ValueError:
                 dice = self.dice[:diceFindBonus]
 
         elif '-' in self.dice:
             diceFindBonus = self.dice.find('-')
-            rollBonus = self.dice[diceFindBonus:].replace('-', '')
+            self.rollBonus = self.dice[diceFindBonus:].replace('-', '')
             self.diceT = self.diceT[:diceFindBonus - 1].replace('-', '')
             try:
-                rollBonus = int(rollBonus)
+                self.rollBonus = int(self.rollBonus)
             except ValueError:
                 dice = self.dice[:diceFindBonus]
 
         elif '*' in self.dice:
             diceFindBonus = self.dice.find('*')
-            rollBonus = self.dice[diceFindBonus:].replace('*', '')
+            self.rollBonus = self.dice[diceFindBonus:].replace('*', '')
             self.diceT = self.diceT[:diceFindBonus - 1].replace('*', '')
             try:
-                rollBonus = int(rollBonus)
+                self.rollBonus = int(self.rollBonus)
             except ValueError:
                 dice = self.dice[:diceFindBonus]
 
         elif '/' in self.dice:
             diceFindBonus = self.dice.find('/')
-            rollBonus = self.dice[diceFindBonus:].replace('/', '')
+            self.rollBonus = self.dice[diceFindBonus:].replace('/', '')
             self.diceT = self.diceT[:diceFindBonus - 1].replace('/', '')
             try:
-                rollBonus = int(rollBonus)
+                self.rollBonus = int(self.rollBonus)
             except ValueError:
                 dice = self.dice[:diceFindBonus]
         
@@ -67,27 +68,27 @@ class diceMain:
         '''Sum List of dice roll and roll bonus'''
 
         if '+' in self.dice:
-            rollTotal = sum(self.rollList) + rollBonus
-            self.rollList.append(f'+{rollBonus}')
-            rollBonus = ''
+            self.rollTotal = sum(self.rollList) + self.rollBonus
+            self.rollList.append(f'+{self.rollBonus}')
+            self.rollBonus = ''
 
         elif '-' in self.dice:
-            rollTotal = sum(self.rollList) - rollBonus
-            self.rollList.append(f'-{rollBonus}')
-            rollBonus = ''
+            self.rollTotal = sum(self.rollList) - self.rollBonus
+            self.rollList.append(f'-{self.rollBonus}')
+            self.rollBonus = ''
 
         elif '*' in self.dice:
-            rollTotal = sum(self.rollList) * rollBonus
-            self.rollList.append(f'*{rollBonus}')
-            rollBonus = ''
+            self.rollTotal = sum(self.rollList) * self.rollBonus
+            self.rollList.append(f'*{self.rollBonus}')
+            self.rollBonus = ''
 
         elif '/' in self.dice:
-            rollTotal = sum(self.rollList) / rollBonus
-            self.rollList.append(f'/{rollBonus}')
-            rollBonus = ''
+            self.rollTotal = sum(self.rollList) / self.rollBonus
+            self.rollList.append(f'/{self.rollBonus}')
+            self.rollBonus = ''
 
         else:
-            rollTotal = sum(self.rollList)
+            self.rollTotal = sum(self.rollList)
 
     def dataShow(self):
         '''Data show'''
@@ -98,8 +99,8 @@ class diceMain:
         if len(self.rollList) > 1: # If characters of self.rollList (maximum limit of scroll dice) > one scroll dice
             print(f'List of dice roll: {", ".join(map(str, self.rollList))}') # Show list of scroll dice and bonus
         print(f'Total of dice roll: {self.rollTotal}') # Show total of scroll dice and bonus
-
-    def dice(self):
+    
+    def diceRoll(self):
         self.getScrollTimes()
         self.bonus()
 
