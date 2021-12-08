@@ -1,3 +1,5 @@
+Online: https://replit.com/@IkkiArtz/RollDice
+
 The rolldice can roll dice at the interval that you choose, times as you want and sum bonus. And return list of rolls (with bonus if add) and total roll.<br>
 Sintax example:
 ```
