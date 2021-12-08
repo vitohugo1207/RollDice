@@ -59,9 +59,9 @@ class diceMain():
             except ValueError:
                 dice = self.dice[:diceFindBonus]
         
-        if self.diceT == '0': # If not have 'd' in dice
+        elif self.diceT == '0': # If not have 'd' in dice
             self.diceA = 1
-            self.diceT = dice
+            self.diceT = self.dice
 
     def sumDice(self):
         '''Sum List of dice roll and roll bonus'''
@@ -100,16 +100,12 @@ class diceMain():
         print(f'Total of dice roll: {self.rollTotal}') # Show total of scroll dice and bonus
     
     def diceRoll(self):
-        self.getScrollTimes()
-        self.bonus()
-
         try:
             # __Str for Int__
             self.diceT = int(self.diceT) + 1 # Counting with the 0
             self.diceA = int(self.diceA)
         except:
             print('I am sorry, did not understood. Type "help" for instructions.')
-            sleep(5)
             dice = ''
             return
 
@@ -119,9 +115,12 @@ class diceMain():
                 self.rollList.append(randrange(self.diceMin, self.diceT))  # self.diceMin (Minimum) between self.diceT (Total)
         except:
             print('I am sorry, did not understood. Type "help" for instructions.')
-            sleep(5)
             dice = ''
             return
 
+    def main(self):
+        self.getScrollTimes()
+        self.bonus()
+        self.diceRoll()
         self.sumDice()
         self.dataShow()

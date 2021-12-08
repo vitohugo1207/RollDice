@@ -26,4 +26,4 @@ if __name__ == "__main__":
                 choiceImport.choiceDef()
             else:
                 diceImport = diceMain(dice = roll)
-                diceImport.diceRoll()
+                diceImport.main()
