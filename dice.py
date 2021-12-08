@@ -10,16 +10,22 @@ class diceMain():
         self.rollList = []
         self.rollBonus = None
         self.rollTotal = None
+        self.diceSeveral = None
 
     def getScrollTimes(self):
         '''Dice scroll times'''
-        
+        # Extraction time of dice roll and remove "d"
         diceFindD = self.dice.find('d')
-        self.diceA = self.dice[:diceFindD].replace('d', '') # Extraction time of dice roll and remove "d"
+        self.diceA = self.dice[:diceFindD].replace('d', '') 
         if self.diceA == '':
             self.diceA = 1
+
         self.diceT = self.dice[diceFindD:].replace('d', '') # Extraction interval of draw
 
+        # split dices
+        diceFindD = self.dice.find(self.diceT)
+        self.diceSeveral = self.dice[diceFindD + len(self.diceT):]
+        
     def bonus(self):
         '''Bonus extraction'''
 
@@ -119,6 +125,8 @@ class diceMain():
             return
 
     def main(self):
+        for x in range(self.dice.count('d')):
+            pass
         self.getScrollTimes()
         self.bonus()
         self.diceRoll()
